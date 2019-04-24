@@ -19,4 +19,27 @@ describe 'Board' do
             expect(board.rows[6][7].pos).to eq([6, 7])
         end
     end
+
+    describe '#move_piece' do
+        it 'updates the board correctly' do
+            board.move_piece([1, 0], [2, 0])
+            expect(board.rows[1][0]).to be_nil
+            expect(board.rows[2][0].color).to eq(:white)
+        end
+
+        it "updates the piece's @pos correctly" do
+            board.move_piece([1, 0], [2, 0])
+            expect(board.rows[2][0].pos).to eq([2, 0])
+        end
+
+        it 'raises an error if there is no piece at start_pos' do
+            err_msg = 'No piece at start_pos'
+            expect{ board.move_piece([2, 0], [3, 0]) }.to raise_error(err_msg)
+        end
+
+        it 'raises an error if end_pos is off the board' do
+            err_msg = 'Invalid position'
+            expect{ board.move_piece([7, 7], [8, 7]) }.to raise_error(err_msg)
+        end
+    end
 end
