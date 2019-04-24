@@ -6,6 +6,12 @@ describe 'Piece' do
     let(:board) { Board.new }
     let(:piece) { Piece.new(:black, board, [7, 7]) }
 
+    describe 'to_s' do
+        it 'returns a string with the correct format' do
+            expect(piece.to_s).to eq('X')
+        end
+    end
+
     describe '#pos=' do
         it 'updates @pos to the new position' do
             piece.pos = [7, 6]
