@@ -19,15 +19,12 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-        start_row, start_column = start_pos
-        end_row, end_column = end_pos
-
-        piece_to_move = @rows[start_row][start_column]
+        piece_to_move = self[start_pos]
         raise('No piece at start_pos') if piece_to_move.nil?
 
         piece_to_move.pos = end_pos
-        @rows[end_row][end_column] = piece_to_move
-        @rows[start_row][start_column] = nil
+        self[end_pos] = piece_to_move
+        self[start_pos] = nil
     end
 
     private
