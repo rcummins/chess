@@ -20,6 +20,6 @@ class Piece
     end
 
     def symbol
-        'X'
+        'X '
     end
 end

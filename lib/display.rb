@@ -2,6 +2,8 @@ require 'colorize'
 require_relative 'cursor'
 
 class Display
+    attr_reader :cursor
+
     def initialize(board)
         @board = board
         @cursor = Cursor.new([0, 0], board)
@@ -14,7 +16,7 @@ class Display
                 pos = [row, column]
                 piece = @board[pos]
                 piece_color = ((piece.nil?) ? :white : piece.color)
-                display_code = ((piece.nil?) ? '  ' : 'X ')
+                display_code = ((piece.nil?) ? '  ' : piece.symbol)
 
                 background = case
                 when @cursor.selected && @cursor.cursor_pos == pos
