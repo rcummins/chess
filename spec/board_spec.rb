@@ -58,4 +58,15 @@ describe 'Board' do
             expect{ board.move_piece([7, 7], [8, 7]) }.to raise_error(err_msg)
         end
     end
+
+    describe '#valid_pos?' do
+        it 'returns true for a position that is on the board' do
+            expect(board.valid_pos?([0, 0])).to eq(true)
+        end
+
+        it 'returns false for a position that is off the board' do
+            expect(board.valid_pos?([-1, 0])).to eq(false)
+            expect(board.valid_pos?([8, 0])).to eq(false)
+        end
+    end
 end

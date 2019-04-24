@@ -27,6 +27,10 @@ class Board
         self[start_pos] = nil
     end
 
+    def valid_pos?(pos)
+        pos.all? { |index| index.between?(0, 7) }
+    end
+
     private
 
     def setup_board
