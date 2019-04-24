@@ -8,7 +8,8 @@ class Display
     end
 
     def render
-        (0..7).reverse_each do |row|
+        system('clear')
+        (0..7).each do |row|
             (0..7).each do |column|
                 pos = [row, column]
                 piece = @board[pos]

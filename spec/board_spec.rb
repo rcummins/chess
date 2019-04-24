@@ -6,12 +6,12 @@ describe 'Board' do
 
     describe 'initialize' do
         it 'places pieces in the correct initial positions' do
-            expect(board.rows[0][0].color).to eq(:white)
-            expect(board.rows[1][0].color).to eq(:white)
+            expect(board.rows[0][0].color).to eq(:black)
+            expect(board.rows[1][0].color).to eq(:black)
             expect(board.rows[2][0]).to be_nil
-            expect(board.rows[6][0].color).to eq(:black)
-            expect(board.rows[7][7].color).to eq(:black)
-            expect(board.rows[0][7].color).to eq(:white)
+            expect(board.rows[6][0].color).to eq(:white)
+            expect(board.rows[7][7].color).to eq(:white)
+            expect(board.rows[0][7].color).to eq(:black)
         end
 
         it 'sets the Piece @pos attribute correctly' do
@@ -40,7 +40,7 @@ describe 'Board' do
         it 'updates the board correctly' do
             board.move_piece([1, 0], [2, 0])
             expect(board.rows[1][0]).to be_nil
-            expect(board.rows[2][0].color).to eq(:white)
+            expect(board.rows[2][0].color).to eq(:black)
         end
 
         it "updates the piece's @pos correctly" do
