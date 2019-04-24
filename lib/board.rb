@@ -8,6 +8,16 @@ class Board
         setup_board
     end
 
+    def [](pos)
+        row, column = pos
+        return @rows[row][column]
+    end
+
+    def []=(pos, new_value)
+        row, column = pos
+        @rows[row][column] = new_value
+    end
+
     def move_piece(start_pos, end_pos)
         start_row, start_column = start_pos
         end_row, end_column = end_pos

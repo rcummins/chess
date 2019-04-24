@@ -20,6 +20,22 @@ describe 'Board' do
         end
     end
 
+    describe '[]' do
+        it 'returns the correct value from the board' do
+            pos = [0, 0]
+            expect(board[pos]).to eq(board.rows[0][0])
+        end
+    end
+
+    describe '[]=' do
+        it 'updates the value at the correct position' do
+            pos = [0, 0]
+            new_value = Piece.new(:black, board, pos)
+            board[pos] = new_value
+            expect(board.rows[0][0]).to eq(new_value)
+        end
+    end
+
     describe '#move_piece' do
         it 'updates the board correctly' do
             board.move_piece([1, 0], [2, 0])
