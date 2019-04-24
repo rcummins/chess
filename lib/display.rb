@@ -17,6 +17,8 @@ class Display
                 display_code = ((piece.nil?) ? '  ' : 'X ')
 
                 background = case
+                when @cursor.selected && @cursor.cursor_pos == pos
+                    :selected
                 when @cursor.cursor_pos == pos
                     :cursor_here
                 when (row + column).odd?
@@ -26,12 +28,16 @@ class Display
                 end
 
                 case
+                when piece_color == :white && background == :selected
+                    print display_code.white.on_blue
                 when piece_color == :white && background == :cursor_here
                     print display_code.white.on_green
                 when piece_color == :white && background == :dark
                     print display_code.white.on_magenta
                 when piece_color == :white && background == :light
                     print display_code.white.on_light_magenta
+                when piece_color == :black && background == :selected
+                    print display_code.black.on_blue
                 when piece_color == :black && background == :cursor_here
                     print display_code.black.on_green
                 when piece_color == :black && background == :dark
