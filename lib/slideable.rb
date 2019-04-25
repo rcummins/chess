@@ -9,6 +9,6 @@ module Slideable
 
     private 
 
-    HORIZONTAL_DIRS = [:left, :right, :up, :down]
-    DIAGONAL_DIRS = [:up_left, :up_right, :down_right, :down_left]
+    HORIZONTAL_DIRS = [[0, -1], [0, 1], [1, 0], [-1, 0]]
+    DIAGONAL_DIRS = [[1, -1], [1, 1], [-1, 1], [-1, -1]]
 end

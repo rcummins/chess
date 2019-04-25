@@ -8,7 +8,7 @@ describe 'Piece' do
 
     describe 'to_s' do
         it 'returns a string with the correct format' do
-            expect(piece.to_s).to eq('X')
+            expect(piece.to_s).to eq('X ')
         end
     end
 
