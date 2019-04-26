@@ -69,4 +69,22 @@ describe 'Board' do
             expect(board.valid_pos?([8, 0])).to eq(false)
         end
     end
+
+    describe '#in_check?' do
+        it 'returns false when the white king is not in check' do
+            expect(board.in_check?(:white)).to eq(false)
+            board.move_piece([6,5], [5,5])
+            board.move_piece([1,4], [3,4])
+            board.move_piece([6,6], [4,6])
+            expect(board.in_check?(:white)).to eq(false)
+        end
+
+        it 'returns true when the white king is in check' do
+            board.move_piece([6,5], [5,5])
+            board.move_piece([1,4], [3,4])
+            board.move_piece([6,6], [4,6])
+            board.move_piece([0,3], [4,7])
+            expect(board.in_check?(:white)).to eq(true)
+        end
+    end
 end

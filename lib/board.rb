@@ -36,6 +36,12 @@ class Board
         pos.all? { |index| index.between?(0, 7) }
     end
 
+    def in_check?(color)
+        king_pos = find_king_position(color)
+        opponent_moves = find_all_opponent_moves(color)
+        return opponent_moves.include?(king_pos)
+    end
+
     private
 
     def setup_board
@@ -60,5 +66,33 @@ class Board
             @rows[1][column] = Pawn.new(:black, self, [1, column])
             @rows[6][column] = Pawn.new(:white, self, [6, column])
         end
+    end
+
+    def find_king_position(color)
+        (0..7).each do |row|
+            (0..7).each do |column|
+                piece = @rows[row][column]
+                if piece.is_a?(King) && piece.color == color
+                    return [row, column]
+                end
+            end
+        end
+    end
+
+    def find_all_opponent_moves(color)
+        opponent_color = ((color == :white) ? :black : :white)
+
+        opponent_moves = []
+
+        (0..7).each do |row|
+            (0..7).each do |column|
+                piece = @rows[row][column]
+                next if piece.nil?
+
+                opponent_moves += piece.moves if piece.color == opponent_color
+            end
+        end
+
+        return opponent_moves
     end
 end
