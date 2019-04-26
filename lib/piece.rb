@@ -13,7 +13,7 @@ class Piece
     end
 
     def valid_moves
-        []
+        moves.reject { |end_pos| in_check_after_move?(end_pos) }
     end
 
     def pos=(new_pos)
@@ -26,5 +26,14 @@ class Piece
 
     def symbol
         'X '
+    end
+
+    private
+
+    def in_check_after_move?(end_pos)
+        duped_board = @board.deep_dup
+        duped_board.move_piece(@pos, end_pos)
+
+        return duped_board.in_check?(@color)
     end
 end
