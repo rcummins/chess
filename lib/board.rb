@@ -1,7 +1,7 @@
 require_relative 'piece'
 
 class Board
-    attr_reader :rows
+    attr_accessor :rows
 
     def initialize
         @rows = Array.new(8) { Array.new(8) }
