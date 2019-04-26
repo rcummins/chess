@@ -47,6 +47,23 @@ class Board
         return opponent_valid_moves.empty?
     end
 
+    def deep_dup
+        duped_board = self.dup
+
+        duped_board.rows = Array.new(8) { Array.new(8) }
+        (0..7).each do |row|
+            (0..7).each do |column|
+                piece = @rows[row][column]
+                next if piece.nil?
+
+                duped_board.rows[row][column] = piece.dup
+                duped_board.rows[row][column].board = duped_board
+            end
+        end
+
+        return duped_board
+    end
+
     private
 
     def setup_board

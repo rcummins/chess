@@ -105,4 +105,54 @@ describe 'Board' do
             expect(board.checkmate?(:white)).to eq(true)
         end
     end
+
+    describe '#deep_dup' do
+        it 'changes to the old board do not affect the duplicated board' do
+            duped_board = board.deep_dup
+            board[[0,0]] = nil
+            board[[7,3]] = nil
+            board[[1,1]].pos = [2,2]
+            expect(board[[0,0]].class).to eq(NilClass)
+            expect(board[[7,3]].class).to eq(NilClass)
+            expect(board[[1,1]].pos).to eq([2,2])
+            expect(duped_board[[0,0]].class).to eq(Rook)
+            expect(duped_board[[7,3]].class).to eq(Queen)
+            expect(duped_board[[1,1]].pos).to eq([1,1])
+        end
+
+        it 'changes to the duplicated board do not affect the old board' do
+            duped_board = board.deep_dup
+            duped_board[[0,0]] = nil
+            duped_board[[7,3]] = nil
+            duped_board[[1,1]].pos = [2,2]
+            expect(board[[0,0]].class).to eq(Rook)
+            expect(board[[7,3]].class).to eq(Queen)
+            expect(board[[1,1]].pos).to eq([1,1])
+            expect(duped_board[[0,0]].class).to eq(NilClass)
+            expect(duped_board[[7,3]].class).to eq(NilClass)
+            expect(duped_board[[1,1]].pos).to eq([2,2])
+        end
+
+        it 'duplicates instance variables' do
+            duped_board = board.deep_dup
+            expect(duped_board[[0,0]].color).to eq(:black)
+            expect(duped_board[[0,0]].pos).to eq([0,0])
+            expect(duped_board[[7,3]].color).to eq(:white)
+            expect(duped_board[[7,3]].pos).to eq([7,3])
+        end
+
+        it 'duplicates nested arrays stored in instance variables' do
+            duped_board = board.deep_dup
+            expected_result = [[0, -1], [0, 1], [1, 0], [-1, 0]]
+            expect(duped_board[[0,0]].horizontal_dirs).to eq(expected_result)
+        end
+
+        it 'updates the board referenced by pieces to be new duped board' do
+            duped_board = board.deep_dup
+            duped_board.move_piece([6,5], [5,5])
+            referenced_board = duped_board[[0,0]].board
+            expect(referenced_board[[6,5]]).to eq(nil)
+            expect(referenced_board[[5,5]].class).to eq(Pawn)
+        end
+    end
 end
