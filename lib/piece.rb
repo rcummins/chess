@@ -11,6 +11,10 @@ class Piece
         symbol
     end
 
+    def valid_moves
+        []
+    end
+
     def pos=(new_pos)
         raise 'Invalid position' unless new_pos.is_a?(Array)
         raise 'Invalid position' unless new_pos.length == 2

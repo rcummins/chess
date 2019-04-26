@@ -87,4 +87,22 @@ describe 'Board' do
             expect(board.in_check?(:white)).to eq(true)
         end
     end
+
+    describe '#checkmate?' do
+        xit 'returns false when the white king is not in check' do
+            expect(board.checkmate?(:white)).to eq(false)
+            board.move_piece([6,5], [5,5])
+            board.move_piece([1,4], [3,4])
+            board.move_piece([6,6], [4,6])
+            expect(board.checkmate?(:white)).to eq(false)
+        end
+
+        xit 'returns true when the white king is in check' do
+            board.move_piece([6,5], [5,5])
+            board.move_piece([1,4], [3,4])
+            board.move_piece([6,6], [4,6])
+            board.move_piece([0,3], [4,7])
+            expect(board.checkmate?(:white)).to eq(true)
+        end
+    end
 end

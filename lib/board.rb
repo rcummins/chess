@@ -42,6 +42,11 @@ class Board
         return opponent_moves.include?(king_pos)
     end
 
+    def checkmate?(color)
+        opponent_valid_moves = find_opponent_valid_moves(color)
+        return opponent_valid_moves.empty?
+    end
+
     private
 
     def setup_board
@@ -94,5 +99,22 @@ class Board
         end
 
         return opponent_moves
+    end
+
+    def find_opponent_valid_moves(color)
+        opponent_color = ((color == :white) ? :black : :white)
+
+        o_v_moves = []
+
+        (0..7).each do |row|
+            (0..7).each do |column|
+                piece = @rows[row][column]
+                next if piece.nil?
+
+                o_v_moves += piece.valid_moves if piece.color == opponent_color
+            end
+        end
+
+        return o_v_moves
     end
 end
