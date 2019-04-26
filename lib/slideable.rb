@@ -19,10 +19,11 @@ module Slideable
                 new_pos = [new_pos[0] + dir[0], new_pos[1] + dir[1]]
             end
 
-            # if the position is occupied by a piece of the opposite color, 
-            # add this position to the list of moves
-            if !@board[new_pos].nil? && @board[new_pos].color != @color
-                end_positions << new_pos
+            # add this position to the list of moves if the position is on 
+            # the board and occupied by a piece of the opposite color
+            if (@board.valid_pos?(new_pos) && !@board[new_pos].nil? && 
+                @board[new_pos].color != @color)
+                    end_positions << new_pos
             end
         end
 
