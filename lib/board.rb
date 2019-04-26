@@ -84,37 +84,37 @@ class Board
         end
     end
 
-    def find_all_opponent_moves(color)
-        opponent_color = ((color == :white) ? :black : :white)
-
-        opponent_moves = []
+    def find_pieces(color)
+        pieces = []
 
         (0..7).each do |row|
             (0..7).each do |column|
                 piece = @rows[row][column]
                 next if piece.nil?
-
-                opponent_moves += piece.moves if piece.color == opponent_color
+                pieces << piece if piece.color == color
             end
         end
+
+        return pieces
+    end
+
+    def find_all_opponent_moves(color)
+        opponent_color = ((color == :white) ? :black : :white)
+        opponent_pieces = find_pieces(opponent_color)
+        opponent_moves = []
+
+        opponent_pieces.each { |piece| opponent_moves += piece.moves }
 
         return opponent_moves
     end
 
     def find_opponent_valid_moves(color)
         opponent_color = ((color == :white) ? :black : :white)
+        opponent_pieces = find_pieces(opponent_color)
+        opp_valid_moves = []
 
-        o_v_moves = []
+        opponent_pieces.each { |piece| opp_valid_moves += piece.valid_moves }
 
-        (0..7).each do |row|
-            (0..7).each do |column|
-                piece = @rows[row][column]
-                next if piece.nil?
-
-                o_v_moves += piece.valid_moves if piece.color == opponent_color
-            end
-        end
-
-        return o_v_moves
+        return opp_valid_moves
     end
 end
