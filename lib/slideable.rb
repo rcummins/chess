@@ -14,7 +14,7 @@ module Slideable
             new_pos = [@pos[0] + dir[0], @pos[1] + dir[1]]
 
             # keep moving until the position is not empty or is off the board
-            while @board[new_pos].nil? && @board.valid_pos?(new_pos)
+            while @board.valid_pos?(new_pos) && @board[new_pos].nil?
                 end_positions << new_pos
                 new_pos = [new_pos[0] + dir[0], new_pos[1] + dir[1]]
             end
