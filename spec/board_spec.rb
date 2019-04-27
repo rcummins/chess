@@ -80,6 +80,19 @@ describe 'Board' do
             board.move_piece([6,6], [4,6])
             expect{ board.move_piece([0,3], [4,7]) }.not_to raise_error
         end
+
+        it "removes opponent's piece when the move results in a kill" do
+            board.move_piece([6,0], [5,0])
+            board.move_piece([1,4], [3,4])
+            board.move_piece([6,1], [5,1])
+            board.move_piece([0,3], [4,7])
+            board.move_piece([6,2], [5,2])
+            board.move_piece([4,7], [6,7])
+            expect(board[[6,7]].class).to eq(Queen)
+            board.move_piece([6,3], [5,3])
+            board.move_piece([6,7], [5,7])
+            expect(board[[6,7]]).to eq(nil)
+        end
     end
 
     describe '#valid_pos?' do
