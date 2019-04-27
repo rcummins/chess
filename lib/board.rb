@@ -4,6 +4,7 @@ require_relative 'bishop'
 require_relative 'queen'
 require_relative 'king'
 require_relative 'pawn'
+require 'byebug'
 
 class Board
     attr_accessor :rows
@@ -43,8 +44,8 @@ class Board
     end
 
     def checkmate?(color)
-        opponent_valid_moves = find_opponent_valid_moves(color)
-        return opponent_valid_moves.empty?
+        player_valid_moves = find_player_valid_moves(color)
+        return player_valid_moves.empty?
     end
 
     def deep_dup
@@ -125,12 +126,11 @@ class Board
         return opponent_moves
     end
 
-    def find_opponent_valid_moves(color)
-        opponent_color = ((color == :white) ? :black : :white)
-        opponent_pieces = find_pieces(opponent_color)
+    def find_player_valid_moves(color)
+        player_pieces = find_pieces(color)
         opp_valid_moves = []
 
-        opponent_pieces.each { |piece| opp_valid_moves += piece.valid_moves }
+        player_pieces.each { |piece| opp_valid_moves += piece.valid_moves }
 
         return opp_valid_moves
     end
