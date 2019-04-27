@@ -101,4 +101,15 @@ describe 'Pawn' do
             end
         end
     end
+
+    describe 'Piece#valid_moves' do
+        it 'returns correct positions when king is in check' do
+            board.move_piece([6,5], [5,5])
+            board.move_piece([1,4], [3,4])
+            board.move_piece([6,4], [5,4])
+            board.move_piece([0,3], [4,7])
+            expect(board[[6,6]].moves).to eq([[5,6], [4,6]])
+            expect(board[[6,6]].valid_moves).to eq([[5,6]])
+        end
+    end
 end
