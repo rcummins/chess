@@ -28,6 +28,10 @@ class Piece
         'X '
     end
 
+    def inspect
+        "#{@color} #{self.class} #{@pos}"
+    end
+
     private
 
     def in_check_after_move?(end_pos)
