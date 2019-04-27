@@ -9,23 +9,22 @@ class Pawn < Piece
         end_positions = []
 
         # add one step forward to the list of positions if it is on the board 
-        # and it is empty or occupied by opponent's piece
+        # and it is empty
         one_step = add_diff_to_pos(@pos, step_forward)
-        if @board.valid_pos?(one_step) && 
-            (@board[one_step].nil? || @board[one_step].color != @color)
-                end_positions << one_step
+        if @board.valid_pos?(one_step) && @board[one_step].nil?
+            end_positions << one_step
         end
 
         # add two steps forward to the list of positions if:
         # 1. the pawn is on the starting row and
         # 2. the position two steps forward is on the board and
         # 3. the first step is empty and 
-        # 4. the second step is empty or occupied by opponent's piece
+        # 4. the second step is empty
         two_steps = add_diff_to_pos(one_step, step_forward)
         if at_start_row? &&
             @board.valid_pos?(two_steps) &&
             @board[one_step].nil? &&
-            (@board[two_steps].nil? || @board[two_steps].color != @color)
+            @board[two_steps].nil?
                 end_positions << two_steps
         end
 
