@@ -16,4 +16,16 @@ describe 'Queen' do
             expect(queen.moves).to eq(expected_result)
         end
     end
+
+    describe 'Piece#valid_moves' do
+        it 'returns the correct positions when king is in check' do
+            board.move_piece([6,4], [4,4])
+            board.move_piece([1,4], [2,4])
+            board.move_piece([6,5], [5,5])
+            board.move_piece([0,3], [3,6])
+            board.move_piece([6,6], [5,6])
+            board.move_piece([3,6], [5,4])
+            expect(board[[7,3]].valid_moves).to eq([[6,4]])
+        end
+    end
 end
