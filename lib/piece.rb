@@ -36,7 +36,7 @@ class Piece
 
     def in_check_after_move?(end_pos)
         duped_board = @board.deep_dup
-        duped_board.move_piece(@pos, end_pos)
+        duped_board.move_piece_without_validating(@pos, end_pos)
 
         return duped_board.in_check?(@color)
     end

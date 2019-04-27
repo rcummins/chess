@@ -54,8 +54,31 @@ describe 'Board' do
         end
 
         it 'raises an error if end_pos is off the board' do
-            err_msg = 'Invalid position'
+            err_msg = 'Invalid move'
             expect{ board.move_piece([7, 7], [8, 7]) }.to raise_error(err_msg)
+        end
+
+        it 'raises an error if the move would break the rules' do
+            err_msg = 'Invalid move'
+            expect{ board.move_piece([1,0], [5,0]) }.to raise_error(err_msg)
+        end
+
+        it 'raises an error if the move would leave their king in check' do
+            board.move_piece([6,5], [5,5])
+            board.move_piece([1,4], [3,4])
+            board.move_piece([6,6], [4,6])
+            board.move_piece([1,0], [2,0])
+            board.move_piece([6,4], [5,4])
+            board.move_piece([0,3], [4,7])
+            err_msg = 'Invalid move'
+            expect{ board.move_piece([7,4], [6,5]) }.to raise_error(err_msg)
+        end
+
+        it "doesn't raise error if move would leave opponent king in check" do
+            board.move_piece([6,5], [5,5])
+            board.move_piece([1,4], [3,4])
+            board.move_piece([6,6], [4,6])
+            expect{ board.move_piece([0,3], [4,7]) }.not_to raise_error
         end
     end
 

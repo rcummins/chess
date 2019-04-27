@@ -26,6 +26,17 @@ class Board
 
     def move_piece(start_pos, end_pos)
         piece_to_move = self[start_pos]
+
+        raise('No piece at start_pos') if piece_to_move.nil?
+        raise('Invalid move') unless piece_to_move.valid_moves.include?(end_pos)
+
+        piece_to_move.pos = end_pos
+        self[end_pos] = piece_to_move
+        self[start_pos] = nil
+    end
+
+    def move_piece_without_validating(start_pos, end_pos)
+        piece_to_move = self[start_pos]
         raise('No piece at start_pos') if piece_to_move.nil?
 
         piece_to_move.pos = end_pos
