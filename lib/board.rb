@@ -76,6 +76,10 @@ class Board
         return duped_board
     end
 
+    def won?
+        self.checkmate?(:black) || self.checkmate?(:white)
+    end
+
     private
 
     def setup_board

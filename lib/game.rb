@@ -11,7 +11,7 @@ class Game
     end
 
     def play
-        while true
+        until @board.won?
             @display.render
             puts "Player 1, make your move"
             @player1.make_move
