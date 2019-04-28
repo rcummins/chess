@@ -2,7 +2,7 @@ require_relative 'piece'
 
 class Pawn < Piece
     def symbol
-        'Pa'
+        "\u265F "
     end
 
     def moves

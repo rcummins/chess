@@ -5,7 +5,7 @@ class Bishop < Piece
     include Slideable
 
     def symbol
-        'Bi'
+        "\u265D "
     end
 
     protected

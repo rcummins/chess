@@ -5,7 +5,7 @@ class Rook < Piece
     include Slideable
 
     def symbol
-        'Ro'
+        "\u265C "
     end
 
     protected

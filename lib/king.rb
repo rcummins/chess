@@ -5,7 +5,7 @@ class King < Piece
     include Stepable
 
     def symbol
-        'Ki'
+        "\u265A "
     end
 
     protected
