@@ -80,6 +80,11 @@ class Board
         self.checkmate?(:black) || self.checkmate?(:white)
     end
 
+    def winner
+        return "Black" if self.checkmate?(:white)
+        return "White" if self.checkmate?(:black)
+    end
+
     private
 
     def setup_board

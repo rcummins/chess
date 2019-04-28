@@ -6,20 +6,23 @@ class Game
     def initialize
         @board = Board.new
         @display = Display.new(@board)
-        @player1 = HumanPlayer.new(@board, @display)
-        @player2 = HumanPlayer.new(@board, @display)
+        @white = HumanPlayer.new(@board, @display)
+        @black = HumanPlayer.new(@board, @display)
     end
 
     def play
         until @board.won?
             @display.render
-            puts "Player 1, make your move"
-            @player1.make_move
+            puts "White, make your move"
+            @white.make_move
 
             @display.render
-            puts "Player 2, make your move"
-            @player2.make_move
+            puts "Black, make your move"
+            @black.make_move
         end
+
+        @display.render
+        puts "#{@board.winner} won!"
     end
 end
 
