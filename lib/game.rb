@@ -14,11 +14,21 @@ class Game
         until @board.won?
             @display.render
             puts "White, make your move"
-            @white.make_move
+            begin
+                @white.make_move
+            rescue
+                puts "Sorry, that was not a valid move. Please try again."
+                retry
+            end
 
             @display.render
             puts "Black, make your move"
-            @black.make_move
+            begin
+                @black.make_move
+            rescue
+                puts "Sorry, that was not a valid move. Please try again"
+                retry
+            end
         end
 
         @display.render
