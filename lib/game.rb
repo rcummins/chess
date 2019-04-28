@@ -6,15 +6,18 @@ class Game
     def initialize
         @board = Board.new
         @display = Display.new(@board)
-        @player1 = HumanPlayer.new(@display)
-        @player2 = HumanPlayer.new(@display)
+        @player1 = HumanPlayer.new(@board, @display)
+        @player2 = HumanPlayer.new(@board, @display)
     end
 
     def play
         while true
             @display.render
+            puts "Player 1, make your move"
             @player1.make_move
+
             @display.render
+            puts "Player 2, make your move"
             @player2.make_move
         end
     end
